@@ -1,0 +1,12 @@
+<odoo>
+
+    <record id="group_payment_approval_manager" model="res.groups">
+        <field name="name">Payment Approval Manager</field>
+        <field name="sequence">45</field>
+        <field name="comment">Can approve outgoing payments above the company limit.</field>
+        <field name="privilege_id" ref="account.res_groups_privilege_accounting"/>
+        <field name="implied_ids" eval="[(4, ref('account.group_account_manager'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_sale_approval" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.sale.approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_request_price_approval"
+                        string="Request Price Approval"
+                        type="object"
+                        class="btn-primary"
+                        invisible="not needs_price_approval or price_approval_state in ('to_approve', 'approved')"/>
+                <button name="action_approve_price"
+                        string="Approve Price"
+                        type="object"
+                        class="btn-primary"
+                        groups="company_sale_approval.group_sale_price_manager"
+                        invisible="price_approval_state != 'to_approve'"/>
+                <button name="action_refuse_price"
+                        string="Refuse Price"
+                        type="object"
+                        groups="company_sale_approval.group_sale_price_manager"
+                        invisible="price_approval_state != 'to_approve'"/>
+                <button name="action_reset_price_approval"
+                        string="Reset Approval"
+                        type="object"
+                        invisible="price_approval_state == 'not_required'"/>
+            </xpath>
+            <xpath expr="//group[@name='confirmation_info']" position="after">
+                <group name="price_approval" string="Price Approval">
+                    <field name="needs_price_approval" invisible="1"/>
+                    <field name="max_line_discount" readonly="1"/>
+                    <field name="has_below_cost" readonly="1" invisible="not has_below_cost"/>
+                    <field name="price_approval_state" readonly="1"/>
+                    <field name="price_approver_id" invisible="not price_approver_id"/>
+                    <field name="price_approval_date" invisible="not price_approval_date"/>
+                    <field name="price_approval_note" placeholder="Lý do / ghi chú duyệt giá..."/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_tree_sale_approval" model="ir.ui.view">
+        <field name="name">sale.order.list.inherit.sale.approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-warning">price_approval_state == 'to_approve'</attribute>
+                <attribute name="decoration-success">price_approval_state == 'approved'</attribute>
+                <attribute name="decoration-danger">price_approval_state == 'refused'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="before">
+                <field name="price_approval_state" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_form_logistics" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.company.logistics</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_request_logistics_approval"
+                        string="Request Warehouse Approval"
+                        type="object"
+                        class="btn-primary"
+                        invisible="not logistics_needs_approval or logistics_approval_state in ('to_approve', 'approved')"/>
+                <button name="action_approve_logistics"
+                        string="Approve Transfer"
+                        type="object"
+                        class="btn-primary"
+                        groups="company_logistics.group_logistics_manager"
+                        invisible="logistics_approval_state != 'to_approve'"/>
+                <button name="action_refuse_logistics"
+                        string="Refuse Transfer"
+                        type="object"
+                        groups="company_logistics.group_logistics_manager"
+                        invisible="logistics_approval_state != 'to_approve'"/>
+                <button name="action_book_shipment"
+                        string="Create Shipment"
+                        type="object"
+                        groups="stock.group_stock_user"
+                        invisible="not carrier_id or state == 'done' or state == 'cancel'"/>
+            </xpath>
+            <xpath expr="//page[@name='extra']" position="after">
+                <page string="Warehouse Approval" name="logistics_approval">
+                    <group>
+                        <group string="Approval">
+                            <field name="logistics_needs_approval" invisible="1"/>
+                            <field name="internal_transfer_value" readonly="1"/>
+                            <field name="logistics_approval_state" readonly="1"/>
+                            <field name="logistics_approver_id" invisible="not logistics_approver_id"/>
+                            <field name="logistics_approval_date" invisible="not logistics_approval_date"/>
+                        </group>
+                    </group>
+                    <field name="shipment_log_ids" readonly="1">
+                        <list>
+                            <field name="create_date" string="Thời gian"/>
+                            <field name="carrier_id"/>
+                            <field name="state"/>
+                            <field name="tracking_ref"/>
+                            <field name="message"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

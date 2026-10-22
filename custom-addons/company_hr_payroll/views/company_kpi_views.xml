@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_kpi_list" model="ir.ui.view">
+        <field name="name">company.kpi.list</field>
+        <field name="model">company.kpi</field>
+        <field name="arch" type="xml">
+            <list string="KPI"
+                  decoration-success="passed"
+                  decoration-danger="not passed">
+                <field name="employee_id"/>
+                <field name="department_id" optional="show"/>
+                <field name="name"/>
+                <field name="month"/>
+                <field name="year"/>
+                <field name="unit" optional="hide"/>
+                <field name="target"/>
+                <field name="actual"/>
+                <field name="achievement" widget="progressbar"/>
+                <field name="score"/>
+                <field name="passed" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_company_kpi_form" model="ir.ui.view">
+        <field name="name">company.kpi.form</field>
+        <field name="model">company.kpi</field>
+        <field name="arch" type="xml">
+            <form string="KPI">
+                <sheet>
+                    <group>
+                        <group string="Nhân viên">
+                            <field name="employee_id"/>
+                            <field name="department_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Kỳ đánh giá">
+                            <field name="month"/>
+                            <field name="year"/>
+                            <field name="name"/>
+                            <field name="unit"/>
+                        </group>
+                    </group>
+                    <group string="Chỉ tiêu">
+                        <group>
+                            <field name="target"/>
+                            <field name="actual"/>
+                            <field name="weight"/>
+                        </group>
+                        <group>
+                            <field name="achievement" widget="progressbar"/>
+                            <field name="score"/>
+                            <field name="passed"/>
+                        </group>
+                    </group>
+                    <field name="note" placeholder="Ghi chú đánh giá..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_company_kpi_search" model="ir.ui.view">
+        <field name="name">company.kpi.search</field>
+        <field name="model">company.kpi</field>
+        <field name="arch" type="xml">
+            <search string="KPI">
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="name"/>
+                <filter name="filter_passed" string="Đạt KPI" domain="[('passed', '=', True)]"/>
+                <filter name="filter_failed" string="Chưa đạt" domain="[('passed', '=', False)]"/>
+                <group>
+                    <filter name="group_employee" string="Nhân viên"
+                            context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_department" string="Phòng ban"
+                            context="{'group_by': 'department_id'}"/>
+                    <filter name="group_month" string="Tháng"
+                            context="{'group_by': 'month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_company_kpi" model="ir.actions.act_window">
+        <field name="name">KPI nhân viên</field>
+        <field name="res_model">company.kpi</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_company_kpi_search"/>
+    </record>
+
+</odoo>

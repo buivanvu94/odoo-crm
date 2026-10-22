@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_form_payroll" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.payroll</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_info']" position="after">
+                <page string="Payroll" name="payroll">
+                    <group>
+                        <group string="Working time">
+                            <field name="payroll_standard_days"/>
+                            <field name="payroll_overtime_rate"/>
+                        </group>
+                        <group string="Insurance">
+                            <field name="payroll_employee_insurance_rate"/>
+                            <field name="payroll_employer_insurance_rate"/>
+                            <field name="payroll_insurance_cap"/>
+                        </group>
+                        <group string="Personal income tax">
+                            <field name="payroll_personal_deduction"/>
+                            <field name="payroll_dependent_deduction"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

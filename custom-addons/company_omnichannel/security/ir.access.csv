@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_company_channel_config_user,company.channel.config.user,company.channel.config,company_omnichannel.group_omnichannel_user,read,
+access_company_channel_config_manager,company.channel.config.manager,company.channel.config,company_omnichannel.group_omnichannel_manager,crud,
+access_company_channel_message_user,company.channel.message.user,company.channel.message,company_omnichannel.group_omnichannel_user,read,
+access_company_channel_message_manager,company.channel.message.manager,company.channel.message,company_omnichannel.group_omnichannel_manager,crud,
+company_channel_config_comp_rule,Channel config multi-company,company.channel.config,,crud,"[('company_id', 'in', company_ids)]"
+company_channel_message_comp_rule,Channel message multi-company,company.channel.message,,crud,"[('company_id', 'in', company_ids)]"
+

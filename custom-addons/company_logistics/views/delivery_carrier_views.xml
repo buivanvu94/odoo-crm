@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_delivery_carrier_form_vn" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.inherit.company.logistics</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pricing']" position="before">
+                <page string="Vietnam Carrier" name="vn_carrier">
+                    <group>
+                        <group string="Carrier">
+                            <field name="vn_carrier_type"/>
+                            <field name="api_shop_id"
+                                   invisible="vn_carrier_type in ('manual', 'other')"/>
+                        </group>
+                        <group string="API" invisible="vn_carrier_type in ('manual', 'other')">
+                            <field name="api_endpoint" widget="url"/>
+                            <field name="api_token" password="True"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-info" role="alert">
+                        Với GHN / Viettel Post, nhập endpoint và token do đơn vị vận chuyển cấp.
+                        Nếu chưa cấu hình, hệ thống ghi log và cho phép nhập mã vận đơn thủ công.
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

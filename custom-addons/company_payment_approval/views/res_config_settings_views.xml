@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_payment_approval" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.payment.approval</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='account']" position="inside">
+                <block title="Payment Approval" name="payment_approval">
+                    <setting string="Require approval for outgoing payments"
+                             help="When enabled, outgoing payments above the limit must be approved by an accounting manager before confirmation.">
+                        <field name="payment_approval_enabled"/>
+                    </setting>
+                    <setting string="Automatic approval limit"
+                             help="Outgoing payments above this amount (in company currency) require approval."
+                             invisible="not payment_approval_enabled">
+                        <field name="payment_approval_limit"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

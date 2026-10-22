@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_einvoice_provider_list" model="ir.ui.view">
+        <field name="name">company.einvoice.provider.list</field>
+        <field name="model">company.einvoice.provider</field>
+        <field name="arch" type="xml">
+            <list string="Nhà cung cấp HĐĐT">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="template_code"/>
+                <field name="serial"/>
+                <field name="dry_run"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_company_einvoice_provider_form" model="ir.ui.view">
+        <field name="name">company.einvoice.provider.form</field>
+        <field name="model">company.einvoice.provider</field>
+        <field name="arch" type="xml">
+            <form string="Nhà cung cấp HĐĐT">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="VD: VNPT Invoice"/>
+                            <field name="code"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Hóa đơn">
+                            <field name="template_code"/>
+                            <field name="serial"/>
+                            <field name="dry_run"/>
+                        </group>
+                    </group>
+                    <group string="API" invisible="dry_run">
+                        <group>
+                            <field name="endpoint" widget="url"/>
+                            <field name="username"/>
+                            <field name="password" password="True"/>
+                            <field name="token" password="True"/>
+                        </group>
+                    </group>
+                    <div class="alert alert-warning" role="alert">
+                        Chế độ chạy thử chỉ tạo payload. Để phát hành thật, tắt chạy thử và nhập
+                        endpoint/token do VNPT hoặc Viettel cấp.
+                    </div>
+                    <field name="note" placeholder="Ghi chú..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_company_einvoice_provider" model="ir.actions.act_window">
+        <field name="name">Nhà cung cấp HĐĐT</field>
+        <field name="res_model">company.einvoice.provider</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

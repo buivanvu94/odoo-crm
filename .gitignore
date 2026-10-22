@@ -1,0 +1,15 @@
+# Source Odoo core là git clone riêng — không commit vào repo này
+odoo/
+
+# Bản dump DB và log chạy máy
+backups/
+*.dump
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Cấu hình chứa mật khẩu / credential
+*.conf
+.env

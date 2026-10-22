@@ -1,0 +1,7 @@
+id,name,model_id,group_id/id,operation,domain
+access_company_payslip_user,company.payslip.user,company.payslip,company_hr_payroll.group_payroll_user,cru,
+access_company_payslip_manager,company.payslip.manager,company.payslip,company_hr_payroll.group_payroll_manager,crud,
+access_company_kpi_user,company.kpi.user,company.kpi,company_hr_payroll.group_payroll_user,crud,
+company_payslip_comp_rule,Payslip multi-company,company.payslip,,crud,"[('company_id', 'in', company_ids)]"
+company_kpi_comp_rule,KPI multi-company,company.kpi,,crud,"[('company_id', 'in', company_ids)]"
+

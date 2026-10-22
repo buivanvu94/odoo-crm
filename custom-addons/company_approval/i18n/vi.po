@@ -1,0 +1,239 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* company_approval
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-22 02:27+0000\n"
+"PO-Revision-Date: 2026-10-22 02:27+0000\n"
+"Last-Translator: My Company\n"
+"Language-Team: Vietnamese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: company_approval
+#: model:ir.module.module,summary:base.module_company_approval
+msgid "Internal request and approval workflow"
+msgstr "Quy trình đề xuất và phê duyệt nội bộ"
+
+#. module: company_approval
+#: model:ir.module.module,shortdesc:base.module_company_approval
+msgid "Company Approval"
+msgstr "Phê duyệt nội bộ"
+
+#. module: company_approval
+#: model:ir.actions.act_window,name:company_approval.company_approval_request_action
+#: model:ir.model,name:company_approval.model_company_approval_request
+#: model:ir.ui.menu,name:company_approval.menu_company_approval_request
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_form
+msgid "Approval Request"
+msgstr "Phiếu đề nghị"
+
+#. module: company_approval
+#: model:ir.actions.act_window,name:company_approval.company_approval_request_action
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_list
+msgid "Approval Requests"
+msgstr "Phiếu đề nghị"
+
+#. module: company_approval
+#: model:ir.actions.act_window,name:company_approval.company_approval_request_to_approve_action
+#: model:ir.ui.menu,name:company_approval.menu_company_approval_to_approve
+msgid "Waiting Approval"
+msgstr "Chờ tôi duyệt"
+
+#. module: company_approval
+#: model:ir.ui.menu,name:company_approval.menu_company_approval_root
+msgid "Approvals"
+msgstr "Phê duyệt"
+
+#. module: company_approval
+#: model:ir.ui.menu,name:company_approval.menu_company_approval_request
+msgid "Requests"
+msgstr "Đề nghị"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__name
+msgid "Reference"
+msgstr "Mã phiếu"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__request_type
+msgid "Type"
+msgstr "Loại đề nghị"
+
+#. module: company_approval
+#: model:ir.model.fields.selection,name:company_approval.selection__company_approval_request__request_type__purchase
+msgid "Purchase"
+msgstr "Mua hàng"
+
+#. module: company_approval
+#: model:ir.model.fields.selection,name:company_approval.selection__company_approval_request__request_type__payment
+msgid "Payment"
+msgstr "Thanh toán"
+
+#. module: company_approval
+#: model:ir.model.fields.selection,name:company_approval.selection__company_approval_request__request_type__leave
+msgid "Leave"
+msgstr "Nghỉ phép"
+
+#. module: company_approval
+#: model:ir.model.fields.selection,name:company_approval.selection__company_approval_request__request_type__other
+msgid "Other"
+msgstr "Khác"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__requested_by
+msgid "Requested By"
+msgstr "Người đề nghị"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__approver_id
+#: model:res.groups,name:company_approval.group_approval_manager
+msgid "Approver"
+msgstr "Người duyệt"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__date_request
+msgid "Request Date"
+msgstr "Ngày đề nghị"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__date_approval
+msgid "Approval Date"
+msgstr "Ngày duyệt"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__currency_id
+msgid "Currency"
+msgstr "Tiền tệ"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__reason
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_form
+msgid "Reason"
+msgstr "Lý do"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__state
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_search
+msgid "Status"
+msgstr "Trạng thái"
+
+#. module: company_approval
+#: model:ir.model.fields,field_description:company_approval.field_company_approval_request__company_id
+msgid "Company"
+msgstr "Công ty"
+
+#. module: company_approval
+#: model:ir.model.fields.selection,name:company_approval.selection__company_approval_request__state__draft
+msgid "Draft"
+msgstr "Nháp"
+
+#. module: company_approval
+#: model:ir.model.fields.selection,name:company_approval.selection__company_approval_request__state__submitted
+msgid "Submitted"
+msgstr "Chờ duyệt"
+
+#. module: company_approval
+#: model:ir.model.fields.selection,name:company_approval.selection__company_approval_request__state__approved
+msgid "Approved"
+msgstr "Đã duyệt"
+
+#. module: company_approval
+#: model:ir.model.fields.selection,name:company_approval.selection__company_approval_request__state__refused
+msgid "Refused"
+msgstr "Từ chối"
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_form
+msgid "Submit"
+msgstr "Gửi duyệt"
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_form
+msgid "Approve"
+msgstr "Duyệt"
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_form
+msgid "Refuse"
+msgstr "Từ chối"
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_form
+msgid "Reset to Draft"
+msgstr "Trả về nháp"
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_form
+msgid "Describe what you need and why..."
+msgstr "Mô tả nội dung và lý do đề nghị..."
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_list
+msgid "Total"
+msgstr "Tổng"
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_view_search
+msgid "My Requests"
+msgstr "Đề nghị của tôi"
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_action
+msgid "Create your first approval request"
+msgstr "Tạo phiếu đề nghị đầu tiên"
+
+#. module: company_approval
+#: model_terms:ir.ui.view,arch_db:company_approval.company_approval_request_action
+msgid "Submit a purchase, payment or leave request and follow its approval."
+msgstr "Gửi đề nghị mua hàng, thanh toán hoặc nghỉ phép và theo dõi việc duyệt."
+
+#. module: company_approval
+#: model:res.groups,name:company_approval.group_approval_user
+msgid "User"
+msgstr "Nhân viên"
+
+#. module: company_approval
+#: model:res.groups,comment:company_approval.group_approval_user
+msgid "Can create and follow their own approval requests."
+msgstr "Có thể tạo và theo dõi phiếu đề nghị của mình."
+
+#. module: company_approval
+#: model:res.groups,comment:company_approval.group_approval_manager
+msgid "Can approve or refuse every request of the company."
+msgstr "Có thể duyệt hoặc từ chối mọi phiếu của công ty."
+
+#. module: company_approval
+#: code:addons/company_approval/models/company_approval_request.py:0
+msgid "Only draft requests can be submitted."
+msgstr "Chỉ phiếu ở trạng thái nháp mới được gửi duyệt."
+
+#. module: company_approval
+#: code:addons/company_approval/models/company_approval_request.py:0
+msgid "Only approvers can approve a request."
+msgstr "Chỉ người duyệt mới có quyền duyệt phiếu."
+
+#. module: company_approval
+#: code:addons/company_approval/models/company_approval_request.py:0
+msgid "Only submitted requests can be approved."
+msgstr "Chỉ phiếu đang chờ duyệt mới được duyệt."
+
+#. module: company_approval
+#: code:addons/company_approval/models/company_approval_request.py:0
+msgid "Only approvers can refuse a request."
+msgstr "Chỉ người duyệt mới có quyền từ chối phiếu."
+
+#. module: company_approval
+#: code:addons/company_approval/models/company_approval_request.py:0
+msgid "Only submitted requests can be refused."
+msgstr "Chỉ phiếu đang chờ duyệt mới được từ chối."
+
+#. module: company_approval
+#: code:addons/company_approval/models/company_approval_request.py:0
+msgid "This request is already in draft."
+msgstr "Phiếu này đã ở trạng thái nháp."

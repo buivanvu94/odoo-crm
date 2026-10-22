@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_channel_config_list" model="ir.ui.view">
+        <field name="name">company.channel.config.list</field>
+        <field name="model">company.channel.config</field>
+        <field name="arch" type="xml">
+            <list string="Kênh omnichannel">
+                <field name="name"/>
+                <field name="channel"/>
+                <field name="page_id" optional="hide"/>
+                <field name="default_team_id" optional="hide"/>
+                <field name="default_user_id" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_company_channel_config_form" model="ir.ui.view">
+        <field name="name">company.channel.config.form</field>
+        <field name="model">company.channel.config</field>
+        <field name="arch" type="xml">
+            <form string="Kênh omnichannel">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="VD: Zalo OA công ty"/>
+                            <field name="channel"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Phân bổ lead">
+                            <field name="default_team_id"/>
+                            <field name="default_user_id"/>
+                            <field name="source_id"/>
+                        </group>
+                    </group>
+                    <group string="Xác thực kênh">
+                        <group>
+                            <field name="app_id" invisible="channel == 'website'"/>
+                            <field name="app_secret" password="True"
+                                   invisible="channel == 'website'"/>
+                            <field name="page_id" invisible="channel == 'website'"/>
+                        </group>
+                        <group>
+                            <field name="access_token" password="True"
+                                   invisible="channel == 'website'"/>
+                            <field name="verify_token" invisible="channel != 'facebook'"/>
+                        </group>
+                    </group>
+                    <group string="Endpoint" invisible="not id">
+                        <field name="webhook_url" widget="url" readonly="1"/>
+                        <field name="verify_url" widget="url" readonly="1"
+                               invisible="channel != 'facebook'"/>
+                    </group>
+                    <div class="alert alert-info" role="alert">
+                        Dán Webhook URL vào cấu hình ứng dụng Zalo OA / Facebook.
+                        Với website, gửi POST JSON {name, phone, email, message} tới Webhook URL.
+                    </div>
+                    <field name="note" placeholder="Ghi chú..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_company_channel_config" model="ir.actions.act_window">
+        <field name="name">Kênh omnichannel</field>
+        <field name="res_model">company.channel.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

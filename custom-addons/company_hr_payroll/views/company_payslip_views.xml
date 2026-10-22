@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_payslip_list" model="ir.ui.view">
+        <field name="name">company.payslip.list</field>
+        <field name="model">company.payslip</field>
+        <field name="arch" type="xml">
+            <list string="Phiếu lương"
+                  decoration-info="state == 'draft'"
+                  decoration-success="state == 'paid'">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="department_id" optional="show"/>
+                <field name="month"/>
+                <field name="year"/>
+                <field name="worked_days" optional="show"/>
+                <field name="gross_salary" sum="Tổng thu nhập"/>
+                <field name="insurance_employee" optional="hide"/>
+                <field name="pit_amount" optional="hide"/>
+                <field name="net_salary" sum="Thực lĩnh"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_company_payslip_form" model="ir.ui.view">
+        <field name="name">company.payslip.form</field>
+        <field name="model">company.payslip</field>
+        <field name="arch" type="xml">
+            <form string="Phiếu lương">
+                <header>
+                    <button name="action_compute" string="Tính lương" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_confirm" string="Xác nhận" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_pay" string="Đã trả lương" type="object"
+                            class="btn-primary" invisible="state != 'confirmed'"/>
+                    <button name="action_reset" string="Đặt lại" type="object"
+                            invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,paid"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Nhân viên">
+                            <field name="employee_id" readonly="state != 'draft'"/>
+                            <field name="department_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group string="Kỳ lương">
+                            <field name="month" readonly="state != 'draft'"/>
+                            <field name="year" readonly="state != 'draft'"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <group string="Chấm công">
+                        <group>
+                            <field name="standard_days"/>
+                            <field name="worked_days"/>
+                            <field name="worked_hours" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="overtime_hours" widget="float_time"/>
+                            <field name="payment_date" invisible="not payment_date"/>
+                        </group>
+                    </group>
+                    <group string="Thu nhập">
+                        <group>
+                            <field name="contract_wage"/>
+                            <field name="basic_salary"/>
+                            <field name="overtime_amount"/>
+                            <field name="allowance_amount"/>
+                        </group>
+                        <group>
+                            <field name="gross_salary" class="fw-bold"/>
+                        </group>
+                    </group>
+                    <group string="Bảo hiểm">
+                        <group>
+                            <field name="insurance_base"/>
+                            <field name="insurance_employee"/>
+                        </group>
+                        <group>
+                            <field name="insurance_employer"/>
+                        </group>
+                    </group>
+                    <group string="Thuế TNCN">
+                        <group>
+                            <field name="personal_deduction"/>
+                            <field name="dependent_deduction"/>
+                            <field name="taxable_income"/>
+                        </group>
+                        <group>
+                            <field name="pit_amount"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="net_salary" class="fw-bold fs-4"/>
+                        </group>
+                    </group>
+                    <field name="note" placeholder="Ghi chú..."/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_company_payslip_search" model="ir.ui.view">
+        <field name="name">company.payslip.search</field>
+        <field name="model">company.payslip</field>
+        <field name="arch" type="xml">
+            <search string="Phiếu lương">
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="name"/>
+                <filter name="filter_draft" string="Nháp" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_confirmed" string="Đã xác nhận"
+                        domain="[('state', '=', 'confirmed')]"/>
+                <filter name="filter_paid" string="Đã trả" domain="[('state', '=', 'paid')]"/>
+                <separator/>
+                <group>
+                    <filter name="group_employee" string="Nhân viên"
+                            context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_department" string="Phòng ban"
+                            context="{'group_by': 'department_id'}"/>
+                    <filter name="group_month" string="Tháng"
+                            context="{'group_by': 'month'}"/>
+                    <filter name="group_state" string="Trạng thái"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_company_payslip" model="ir.actions.act_window">
+        <field name="name">Phiếu lương</field>
+        <field name="res_model">company.payslip</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_company_payslip_search"/>
+    </record>
+
+</odoo>

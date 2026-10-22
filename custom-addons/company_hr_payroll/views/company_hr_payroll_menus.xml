@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_payroll_root"
+              name="Bảng lương"
+              parent="hr.menu_hr_root"
+              sequence="60"
+              groups="company_hr_payroll.group_payroll_user"/>
+
+    <menuitem id="menu_company_payslip"
+              name="Phiếu lương"
+              parent="menu_payroll_root"
+              action="action_company_payslip"
+              sequence="10"/>
+
+    <menuitem id="menu_company_kpi"
+              name="KPI nhân viên"
+              parent="hr.menu_hr_root"
+              action="action_company_kpi"
+              sequence="61"
+              groups="company_hr_payroll.group_payroll_user"/>
+
+</odoo>

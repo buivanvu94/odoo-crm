@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_employee_form_payroll" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.payroll</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='payroll_information']" position="after">
+                <page string="Company Payroll" name="company_payroll"
+                      groups="company_hr_payroll.group_payroll_user">
+                    <group>
+                        <group string="Salary">
+                            <field name="monthly_wage"/>
+                            <field name="payroll_allowance"/>
+                            <field name="insurance_salary"/>
+                        </group>
+                        <group string="Tax">
+                            <field name="dependent_count"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

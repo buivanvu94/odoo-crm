@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_company_approval_request_user,company.approval.request.user,company.approval.request,company_approval.group_approval_user,cru,"[('requested_by', '=', user.id)]"
+access_company_approval_request_manager,company.approval.request.manager,company.approval.request,company_approval.group_approval_manager,crud,
+company_approval_request_company_rule,company.approval.request.company,company.approval.request,,crud,"[('company_id', 'in', company_ids)]"

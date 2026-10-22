@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="company_approval_request_action" model="ir.actions.act_window">
+        <field name="name">Approval Requests</field>
+        <field name="res_model">company.approval.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="company_approval_request_view_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first approval request
+            </p>
+            <p>
+                Submit a purchase, payment or leave request and follow its approval.
+            </p>
+        </field>
+    </record>
+
+    <record id="company_approval_request_to_approve_action" model="ir.actions.act_window">
+        <field name="name">Waiting Approval</field>
+        <field name="res_model">company.approval.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="company_approval_request_view_search"/>
+        <field name="domain">[('state', '=', 'submitted')]</field>
+        <field name="context">{'search_default_filter_submitted': 1}</field>
+    </record>
+
+    <menuitem id="menu_company_approval_root"
+              name="Approvals"
+              sequence="26"/>
+
+    <menuitem id="menu_company_approval_request"
+              name="Requests"
+              parent="menu_company_approval_root"
+              action="company_approval_request_action"
+              sequence="10"/>
+
+    <menuitem id="menu_company_approval_to_approve"
+              name="Waiting Approval"
+              parent="menu_company_approval_root"
+              action="company_approval_request_to_approve_action"
+              groups="company_approval.group_approval_manager"
+              sequence="20"/>
+
+</odoo>

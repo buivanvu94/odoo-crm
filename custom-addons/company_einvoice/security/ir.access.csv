@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_company_einvoice_provider_user,company.einvoice.provider.user,company.einvoice.provider,company_einvoice.group_einvoice_user,r,
+access_company_einvoice_provider_manager,company.einvoice.provider.manager,company.einvoice.provider,company_einvoice.group_einvoice_manager,crud,
+company_einvoice_provider_comp_rule,E-invoice provider multi-company,company.einvoice.provider,,crud,"[('company_id', 'in', company_ids)]"
+
+

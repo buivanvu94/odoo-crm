@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_company_channel_config"
+              name="Omnichannel"
+              parent="crm.crm_menu_config"
+              action="action_company_channel_config"
+              sequence="60"
+              groups="company_omnichannel.group_omnichannel_manager"/>
+
+    <menuitem id="menu_company_channel_message"
+              name="Tin nhắn omnichannel"
+              parent="crm.crm_menu_config"
+              action="action_company_channel_message"
+              sequence="61"
+              groups="company_omnichannel.group_omnichannel_user"/>
+
+</odoo>

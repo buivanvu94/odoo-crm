@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_company_shipment_log_user,company.shipment.log.user,company.shipment.log,stock.group_stock_user,crud,
+company_shipment_log_comp_rule,Shipment log multi-company,company.shipment.log,,crud,"[('company_id', 'in', company_ids)]"
+

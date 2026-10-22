@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_sale_price_approval" model="ir.actions.act_window">
+        <field name="name">Duyệt giá bán</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('price_approval_state', '=', 'to_approve')]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Không có báo giá nào đang chờ duyệt giá.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_sale_price_approval"
+              name="Duyệt giá bán"
+              parent="sale.sale_order_menu"
+              action="action_sale_price_approval"
+              sequence="15"
+              groups="company_sale_approval.group_sale_price_manager"/>
+
+</odoo>

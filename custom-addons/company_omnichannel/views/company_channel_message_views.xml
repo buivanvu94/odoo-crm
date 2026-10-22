@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_channel_message_list" model="ir.ui.view">
+        <field name="name">company.channel.message.list</field>
+        <field name="model">company.channel.message</field>
+        <field name="arch" type="xml">
+            <list string="Tin nhắn omnichannel" create="0" edit="0"
+                  decoration-danger="state == 'error'"
+                  decoration-success="state == 'processed'">
+                <field name="create_date" string="Thời gian"/>
+                <field name="channel"/>
+                <field name="config_id"/>
+                <field name="event_name"/>
+                <field name="external_id"/>
+                <field name="lead_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_company_channel_message_form" model="ir.ui.view">
+        <field name="name">company.channel.message.form</field>
+        <field name="model">company.channel.message</field>
+        <field name="arch" type="xml">
+            <form string="Tin nhắn omnichannel" create="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="config_id"/>
+                            <field name="channel"/>
+                            <field name="event_name"/>
+                            <field name="external_id"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                            <field name="lead_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="create_date" string="Thời gian"/>
+                        </group>
+                    </group>
+                    <group string="Lỗi" invisible="not error">
+                        <field name="error" nolabel="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Payload" name="payload">
+                            <field name="payload" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_company_channel_message_search" model="ir.ui.view">
+        <field name="name">company.channel.message.search</field>
+        <field name="model">company.channel.message</field>
+        <field name="arch" type="xml">
+            <search string="Tin nhắn omnichannel">
+                <field name="config_id"/>
+                <field name="external_id"/>
+                <field name="lead_id"/>
+                <filter name="filter_error" string="Lỗi" domain="[('state', '=', 'error')]"/>
+                <filter name="filter_processed" string="Đã tạo lead"
+                        domain="[('state', '=', 'processed')]"/>
+                <group>
+                    <filter name="group_channel" string="Kênh"
+                            context="{'group_by': 'channel'}"/>
+                    <filter name="group_config" string="Cấu hình"
+                            context="{'group_by': 'config_id'}"/>
+                    <filter name="group_state" string="Trạng thái"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_company_channel_message" model="ir.actions.act_window">
+        <field name="name">Tin nhắn omnichannel</field>
+        <field name="res_model">company.channel.message</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_company_channel_message_search"/>
+    </record>
+
+</odoo>
