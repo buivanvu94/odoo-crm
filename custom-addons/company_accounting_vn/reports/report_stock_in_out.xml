@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Phiếu nhập kho (Mẫu số 01 - VT) -->
+    <record id="action_report_stock_receipt" model="ir.actions.report">
+        <field name="name">Phiếu nhập kho (01-VT)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_accounting_vn.report_stock_receipt</field>
+        <field name="print_report_name">'Phieu_nhap_kho_%s' % (object.name or 'nhap')</field>
+        <field name="paperformat_id" ref="company_accounting_vn.paperformat_vn_voucher_a4"/>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="group_ids" eval="[(4, ref('account.group_account_user'))]"/>
+    </record>
+
+    <!-- Phiếu xuất kho (Mẫu số 02 - VT) -->
+    <record id="action_report_stock_issue" model="ir.actions.report">
+        <field name="name">Phiếu xuất kho (02-VT)</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_accounting_vn.report_stock_issue</field>
+        <field name="print_report_name">'Phieu_xuat_kho_%s' % (object.name or 'nhap')</field>
+        <field name="paperformat_id" ref="company_accounting_vn.paperformat_vn_voucher_a4"/>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="group_ids" eval="[(4, ref('account.group_account_user'))]"/>
+    </record>
+
+    <template id="report_stock_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="is_receipt" t-value="True"/>
+                <t t-call="company_accounting_vn.stock_voucher_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_stock_issue">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="is_receipt" t-value="False"/>
+                <t t-call="company_accounting_vn.stock_voucher_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Báo cáo tài chính: một bản PDF (A4 dọc) và một bản HTML xem trên màn hình, cùng dùng một thân báo cáo.
+         Chỉ nhóm Kế toán trưởng (account.group_account_manager) được in/xem. -->
+    <record id="action_report_vn_financial" model="ir.actions.report">
+        <field name="name">Báo cáo tài chính</field>
+        <field name="model">vn.financial.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_accounting_vn.report_vn_financial</field>
+        <field name="print_report_name">'Bao_cao_tai_chinh'</field>
+        <field name="paperformat_id" ref="company_accounting_vn.paperformat_vn_voucher_a4"/>
+        <field name="group_ids" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+
+    <record id="action_report_vn_financial_html" model="ir.actions.report">
+        <field name="name">Báo cáo tài chính (xem)</field>
+        <field name="model">vn.financial.report.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">company_accounting_vn.report_vn_financial_html</field>
+        <field name="group_ids" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+
+    <!-- Thân báo cáo. Tham số: o (wizard). -->
+    <template id="vn_financial_document">
+        <t t-set="company" t-value="o.company_id"/>
+        <t t-set="company_address" t-value="', '.join(filter(None, [company.street, company.street2, company.city, company.state_id.name]))"/>
+        <t t-foreach="o._get_sections()" t-as="section">
+            <div class="page" t-att-style="'font-size:12px;' + ('page-break-before:always;' if section_index else '')">
+                <t t-set="form_code" t-value="section['form_code']"/>
+                <t t-set="form_note" t-value="'(Ban hành theo Thông tư số 99/2025/TT-BTC)'"/>
+                <t t-call="company_accounting_vn.voucher_header"/>
+                <h3 style="text-align:center; margin:4px 0;"><strong t-out="section['title']"/></h3>
+                <div style="text-align:center;"><i t-out="section['date_text']"/></div>
+                <div style="text-align:right;"><i>Đơn vị tính: <span t-out="company.currency_id.name"/></i></div>
+                <table style="width:100%; border-collapse:collapse;">
+                    <thead>
+                        <tr style="background:#eee;">
+                            <th style="border:1px solid #000; text-align:center;">Chỉ tiêu</th>
+                            <th style="border:1px solid #000; text-align:center; width:8%;">Mã số</th>
+                            <th style="border:1px solid #000; text-align:center; width:18%;">Số kỳ này</th>
+                            <th t-if="section['has_prior']" style="border:1px solid #000; text-align:center; width:18%;">
+                                Số kỳ so sánh<br/><small t-out="section['prior_text']"/>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="section['rows']" t-as="row"
+                            t-att-style="'font-weight:bold;' if row['bold'] else ''">
+                            <td t-att-style="'border:1px solid #999; padding-left:%dpx;' % (4 + row['level'] * 14)" t-out="row['name']"/>
+                            <td style="border:1px solid #999; text-align:center;" t-out="row['code']"/>
+                            <td style="border:1px solid #999; text-align:right;">
+                                <t t-if="row['value'] is not None" t-out="row['value']" t-options="{'widget': 'float', 'precision': 0}"/>
+                            </td>
+                            <td t-if="section['has_prior']" style="border:1px solid #999; text-align:right;">
+                                <t t-if="row['prior'] is not None" t-out="row['prior']" t-options="{'widget': 'float', 'precision': 0}"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width:100%; margin-top:20px; text-align:center;">
+                    <tr>
+                        <td style="width:33%;"><strong>Người lập biểu</strong><br/><i>(Ký, họ tên)</i></td>
+                        <td style="width:33%;"><strong>Kế toán trưởng</strong><br/><i>(Ký, họ tên)</i></td>
+                        <td style="width:34%;"><strong>Giám đốc</strong><br/><i>(Ký, họ tên, đóng dấu)</i></td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_vn_financial">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="company_accounting_vn.vn_financial_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_vn_financial_html">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="company_accounting_vn.vn_financial_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

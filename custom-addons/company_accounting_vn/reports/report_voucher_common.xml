@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Khối đầu chứng từ dùng chung: đơn vị, địa chỉ, mẫu số. Tham số: form_code, form_note. -->
+    <template id="voucher_header">
+        <table style="width:100%; margin-bottom:10px;">
+            <tr>
+                <td style="width:60%; vertical-align:top;">
+                    <div><strong>Đơn vị: <span t-out="company.name"/></strong></div>
+                    <div>Địa chỉ: <span t-out="company_address"/></div>
+                </td>
+                <td style="width:40%; text-align:center; vertical-align:top;">
+                    <div><strong>Mẫu số <span t-out="form_code"/></strong></div>
+                    <div style="font-size:11px;"><i><span t-out="form_note"/></i></div>
+                </td>
+            </tr>
+        </table>
+    </template>
+
+    <!-- Phiếu thu / phiếu chi. Tham số: o (account.payment), is_receipt. -->
+    <template id="payment_voucher_document">
+        <t t-set="company" t-value="o.company_id"/>
+        <t t-set="company_address" t-value="', '.join(filter(None, [company.street, company.street2, company.city, company.state_id.name]))"/>
+        <t t-set="data" t-value="o._get_voucher_data()"/>
+        <div class="page" style="font-size:14px;">
+            <t t-set="form_code" t-value="'01 - TT' if is_receipt else '02 - TT'"/>
+            <t t-set="form_note" t-value="'(Theo Thông tư số 99/2025/TT-BTC)'"/>
+            <t t-call="company_accounting_vn.voucher_header"/>
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:60%; text-align:center;">
+                        <h3 style="margin:0;"><strong t-if="is_receipt">PHIẾU THU</strong><strong t-else="">PHIẾU CHI</strong></h3>
+                        <div><i t-out="data['date_text']"/></div>
+                    </td>
+                    <td style="width:40%;">
+                        <div>Quyển số: ...........</div>
+                        <div>Số: <strong t-out="o.name or ''"/></div>
+                        <div>Nợ TK: <span t-out="data['debit_codes']"/></div>
+                        <div>Có TK: <span t-out="data['credit_codes']"/></div>
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-top:12px;">
+                <span t-if="is_receipt">Họ và tên người nộp tiền: </span><span t-else="">Họ và tên người nhận tiền: </span>
+                <strong t-out="o.receiver_payer_name or o.partner_id.name or ''"/>
+            </div>
+            <div>Địa chỉ: <span t-out="o.receiver_payer_address or ''"/></div>
+            <div><span t-if="is_receipt">Lý do nộp: </span><span t-else="">Lý do chi: </span><span t-out="o.memo or ''"/></div>
+            <div>
+                Số tiền: <strong t-out="data['amount']" t-options="{'widget': 'monetary', 'display_currency': data['currency']}"/>
+                (Viết bằng chữ): <i t-out="data['amount_words']"/>
+            </div>
+            <div>Kèm theo: <span t-out="o.attached_documents or '.....'"/> Chứng từ gốc.</div>
+            <div style="margin-top:10px;">Đã nhận đủ số tiền (viết bằng chữ): <i t-out="data['amount_words']"/></div>
+            <table style="width:100%; margin-top:20px; text-align:center; table-layout:fixed;">
+                <tr>
+                    <td><strong>Giám đốc</strong><br/><i style="font-size:11px;">(Ký, họ tên, đóng dấu)</i></td>
+                    <td><strong>Kế toán trưởng</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                    <t t-if="is_receipt">
+                        <td><strong>Người nộp tiền</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                        <td><strong>Người lập phiếu</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                        <td><strong>Thủ quỹ</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                    </t>
+                    <t t-else="">
+                        <td><strong>Thủ quỹ</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                        <td><strong>Người lập phiếu</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                        <td><strong>Người nhận tiền</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                    </t>
+                </tr>
+                <tr style="height:80px;"><td colspan="5"></td></tr>
+            </table>
+        </div>
+    </template>
+
+    <!-- Phiếu nhập / xuất kho. Tham số: o (stock.picking), is_receipt. -->
+    <template id="stock_voucher_document">
+        <t t-set="company" t-value="o.company_id"/>
+        <t t-set="company_address" t-value="', '.join(filter(None, [company.street, company.street2, company.city, company.state_id.name]))"/>
+        <t t-set="data" t-value="o._get_vt_voucher_data()"/>
+        <div class="page" style="font-size:13px;">
+            <t t-set="form_code" t-value="'01 - VT' if is_receipt else '02 - VT'"/>
+            <t t-set="form_note" t-value="'(Theo Thông tư số 99/2025/TT-BTC)'"/>
+            <t t-call="company_accounting_vn.voucher_header"/>
+            <div style="text-align:center;">
+                <h3 style="margin:0;"><strong t-if="is_receipt">PHIẾU NHẬP KHO</strong><strong t-else="">PHIẾU XUẤT KHO</strong></h3>
+                <div><i t-out="data['date_text']"/></div>
+                <div>Số: <strong t-out="o.name"/></div>
+                <div>Nợ TK: <span t-out="data['debit_codes'] or '.........'"/> - Có TK: <span t-out="data['credit_codes'] or '.........'"/></div>
+                <div t-if="not data['debit_codes']" style="font-size:11px;"><i>(Chưa có bút toán kho liên kết: kế toán điền tài khoản Nợ/Có khi ghi sổ)</i></div>
+            </div>
+            <div style="margin-top:10px;">
+                <span t-if="is_receipt">Họ và tên người giao: </span><span t-else="">Họ và tên người nhận hàng: </span>
+                <span t-out="o.partner_id.name or ''"/>
+            </div>
+            <div>Theo chứng từ số: <span t-out="o.origin or ''"/></div>
+            <div>
+                <span t-if="is_receipt">Nhập tại kho (ngăn lô): </span><span t-else="">Xuất tại kho (ngăn lô): </span>
+                <span t-out="(o.location_dest_id if is_receipt else o.location_id).display_name"/>
+            </div>
+            <table style="width:100%; border-collapse:collapse; margin-top:10px;" border="1">
+                <thead>
+                    <tr style="text-align:center;">
+                        <th rowspan="2">STT</th>
+                        <th rowspan="2">Tên, nhãn hiệu, quy cách, phẩm chất vật tư, dụng cụ, sản phẩm, hàng hóa</th>
+                        <th rowspan="2">Mã số</th>
+                        <th rowspan="2">Đơn vị tính</th>
+                        <th colspan="2">Số lượng</th>
+                        <th rowspan="2">Đơn giá</th>
+                        <th rowspan="2">Thành tiền</th>
+                    </tr>
+                    <tr style="text-align:center;">
+                        <th>Theo chứng từ</th>
+                        <th><span t-if="is_receipt">Thực nhập</span><span t-else="">Thực xuất</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="data['rows']" t-as="row">
+                        <td style="text-align:center;"><t t-out="row_index + 1"/></td>
+                        <td><t t-out="row['name']"/></td>
+                        <td><t t-out="row['code']"/></td>
+                        <td style="text-align:center;"><t t-out="row['uom']"/></td>
+                        <td style="text-align:right;"><t t-out="row['demand_qty']"/></td>
+                        <td style="text-align:right;"><t t-out="row['done_qty']"/></td>
+                        <td style="text-align:right;"><t t-out="row['price']" t-options="{'widget': 'monetary', 'display_currency': data['currency']}"/></td>
+                        <td style="text-align:right;"><t t-out="row['amount']" t-options="{'widget': 'monetary', 'display_currency': data['currency']}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" style="text-align:right;"><strong>Cộng</strong></td>
+                        <td style="text-align:right;"><strong t-out="data['total']" t-options="{'widget': 'monetary', 'display_currency': data['currency']}"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top:8px;">Tổng số tiền (viết bằng chữ): <i t-out="data['total_words']"/></div>
+            <div>Số chứng từ gốc kèm theo: ..........</div>
+            <table style="width:100%; margin-top:20px; text-align:center; table-layout:fixed;">
+                <tr>
+                    <td><strong>Người lập phiếu</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                    <td t-if="is_receipt"><strong>Người giao hàng</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                    <td t-else=""><strong>Người nhận hàng</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                    <td><strong>Thủ kho</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                    <td><strong>Kế toán trưởng</strong><br/><i style="font-size:11px;">(Ký, họ tên)</i></td>
+                    <td t-if="not is_receipt"><strong>Giám đốc</strong><br/><i style="font-size:11px;">(Ký, họ tên, đóng dấu)</i></td>
+                </tr>
+                <tr style="height:80px;"><td colspan="5"></td></tr>
+            </table>
+        </div>
+    </template>
+</odoo>

@@ -1,6 +1,6 @@
 # Module nghiệp vụ công ty (đã cài trên `odoo-crm`)
 
-Tài liệu này mô tả 7 module trong `custom-addons/`, cách dùng, nơi cấu hình và
+Tài liệu này mô tả 8 module trong `custom-addons/`, cách dùng, nơi cấu hình và
 những phần **cần tài khoản/API thật** mới chạy được.
 
 ## Trạng thái
@@ -14,8 +14,9 @@ những phần **cần tài khoản/API thật** mới chạy được.
 | `company_einvoice` | `account` | Đã cài | 2 |
 | `company_omnichannel` | `crm` | Đã cài | 3 |
 | `company_payment_approval` | `account` | Đã cài | 5 |
+| `company_accounting_vn` | `l10n_vn`, `stock`, `company_einvoice`, `company_payment_approval` | Chưa cài trên `odoo-crm` (cài mới trên DB trắng đạt) | 54 |
 
-- Tổng: **27 test, 0 failed, 0 error** (`custom-tests.log`).
+- Tổng: **81 test, 0 failed, 0 error** (27 test module cũ + 54 test `company_accounting_vn`).
 - Server dev: <http://localhost:8069>, DB `odoo-crm`.
 - Log cài đặt: `custom-install.log`.
 
@@ -222,6 +223,36 @@ muốn duyệt cả hóa đơn nhà cung cấp trước khi ghi sổ, cần mở
 
 ---
 
+## 8. `company_accounting_vn` - Kế toán doanh nghiệp Việt Nam (TT 99/2025)
+
+Đặc tả và lộ trình: [ketoan.md](ketoan.md). Cài: `-i company_accounting_vn`,
+rồi chọn chart template **`vn_tt99`** cho công ty.
+
+- **Chart TT 99:** kế thừa `l10n_vn` (71 TK cấp 1, thuế GTGT 0/5/8/10/KCT).
+  Template đệm số 0 vào mã TK (111 thành `1110`); dùng `vn_display_code` khi in.
+- **Tài khoản đối ứng:** tự gán `counterpart_account_id` / `counterpart_name`
+  khi ghi sổ, xoá khi về nháp. TK 131/331/141 thiếu đối tượng sẽ bị chặn.
+- **Mẫu in:** Phiếu thu 01-TT, Phiếu chi 02-TT (trên `account.payment`),
+  Phiếu nhập 01-VT, Phiếu xuất 02-VT (trên `stock.picking`), số tiền bằng chữ.
+- **Sổ sách:** **Kế toán > Báo cáo > Sổ kế toán (TT 99)**: S01-DN, S02b-DN,
+  S07-DN, S08-DN (gồm phát sinh qua payment), S31-DN (131/331), cân đối phát
+  sinh; xem màn hình, in PDF, xuất Excel.
+- **BCTC:** **Kế toán > Báo cáo**: B01-DN (tình hình tài chính), B02-DN,
+  B03-DN (LCTT trực tiếp/gián tiếp), có kỳ so sánh. Chỉ tiêu nằm trong
+  `data/vn.financial.report.line.csv`.
+- **HĐĐT NĐ 254:** dùng lại `einvoice_number`/`einvoice_serial` của
+  `company_einvoice`, có nút chạy thử (dry-run).
+
+**Phân quyền:** sổ sách cho `account.group_account_user`; BCTC chỉ
+`account.group_account_manager`.
+
+**Còn lại cần làm:** cài `wkhtmltopdf` rồi kiểm PDF A4 thực tế; đối chiếu mã
+chỉ tiêu BCTC và cột sổ với nguyên văn Phụ lục I/III/IV TT 99 (hiện bám mẫu
+TT 200); số dư đầu kỳ chưa xử lý kết chuyển cuối năm; TT 133 mới có cờ
+`accounting_regime`.
+
+---
+
 ## Duyệt đơn mua hàng (có sẵn trong Odoo core)
 
 Không cần module riêng: Odoo 20 đã có cơ chế duyệt 2 bước cho đơn mua.
@@ -249,7 +280,7 @@ Cách kiểm tra / đổi lại:
 cd odoo
 
 # Cài tất cả module (server phải tắt)
-python odoo-bin -c odoo.conf -d odoo-crm -i company_approval,company_sale_approval,company_logistics,company_hr_payroll,company_einvoice,company_omnichannel,company_payment_approval --stop-after-init
+python odoo-bin -c odoo.conf -d odoo-crm -i company_approval,company_sale_approval,company_logistics,company_hr_payroll,company_einvoice,company_omnichannel,company_payment_approval,company_accounting_vn --stop-after-init
 
 # Nâng cấp sau khi sửa code/XML
 python odoo-bin -c odoo.conf -d odoo-crm -u company_sale_approval --stop-after-init

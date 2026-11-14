@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_vn_financial_report_wizard_form" model="ir.ui.view">
+        <field name="name">vn.financial.report.wizard.form</field>
+        <field name="model">vn.financial.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Báo cáo tài chính (TT 99/2025)">
+                <group>
+                    <group>
+                        <field name="report_type"/>
+                        <field name="cash_flow_method" invisible="report_type not in ('all', 'b03')"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="compare_previous"/>
+                    </group>
+                    <group>
+                        <field name="period_type"/>
+                        <field name="year" invisible="period_type == 'custom'"/>
+                        <field name="month" invisible="period_type != 'month'"/>
+                        <field name="quarter" invisible="period_type != 'quarter'"/>
+                        <field name="date_from" required="1" readonly="period_type != 'custom'"/>
+                        <field name="date_to" required="1" readonly="period_type != 'custom'"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_view" type="object" string="Xem" class="btn-primary" data-hotkey="q"/>
+                    <button name="action_print_pdf" type="object" string="In PDF" class="btn-secondary"/>
+                    <button name="action_export_xlsx" type="object" string="Xuất Excel" class="btn-secondary"/>
+                    <button string="Đóng" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_vn_financial_report_wizard" model="ir.actions.act_window">
+        <field name="name">Báo cáo tài chính (TT 99/2025)</field>
+        <field name="res_model">vn.financial.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_vn_financial_report" name="Báo cáo tài chính (TT 99)" parent="account.menu_finance_reports"
+              action="action_vn_financial_report_wizard" sequence="50"
+              groups="account.group_account_manager"/>
+</odoo>

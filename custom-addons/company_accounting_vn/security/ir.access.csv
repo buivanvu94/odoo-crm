@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_accounting_report_wizard_user,accounting.report.wizard.user,accounting.report.wizard,account.group_account_user,crud,
+access_accounting_report_line_user,accounting.report.line.user,accounting.report.line,account.group_account_user,crud,
+access_vn_financial_report_wizard_manager,vn.financial.report.wizard.manager,vn.financial.report.wizard,account.group_account_manager,crud,
+access_vn_financial_report_line_manager,vn.financial.report.line.manager,vn.financial.report.line,account.group_account_manager,r,
+rule_accounting_report_wizard_owner,Accounting report wizard: owner only,accounting.report.wizard,,crud,"[('create_uid', '=', user.id)]"
+rule_accounting_report_line_owner,Accounting report line: owner only,accounting.report.line,,crud,"[('create_uid', '=', user.id)]"
+rule_vn_financial_report_wizard_owner,Financial report wizard: owner only,vn.financial.report.wizard,,crud,"[('create_uid', '=', user.id)]"
