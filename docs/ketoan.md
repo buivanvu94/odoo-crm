@@ -258,7 +258,7 @@ flowchart LR
 Trước khi bàn giao module vào production, module phải vượt qua checklist sau:
 - [x] Không chỉnh sửa bất kỳ dòng nào trong thư mục `odoo/addons/`.
 - [x] Cài đặt mới trên database trắng không báo lỗi phụ thuộc (`-i company_accounting_vn`).
-- [ ] Nâng cấp trên database đã có dữ liệu không gây mất hoặc sai lệch số dư (`-u company_accounting_vn`).
+- [x] Nâng cấp trên database đã có dữ liệu không gây mất hoặc sai lệch số dư (`-u company_accounting_vn`).
 - [ ] 100% các file Python tuân thủ PEP8, có `test_*.py` với kết quả passed toàn bộ.
-- [ ] File dịch `i18n/vi.po` đầy đủ các thuật ngữ kế toán chuyên ngành.
+- [x] File dịch `i18n/vi.po` đầy đủ các thuật ngữ kế toán chuyên ngành.
 - [ ] Mẫu in PDF căn lề chuẩn trang A4, không bị tràn dòng hoặc vỡ trang.
