@@ -157,7 +157,7 @@
 "fr_b03i_15","b03i","1560","15","- Thuế thu nhập doanh nghiệp đã nộp","2","False","NM(3334)+NM(821)"
 "fr_b03i_20","b03i","1570","20","Lưu chuyển tiền thuần từ hoạt động kinh doanh","0","True","[08]+[09]+[10]+[11]+[12]+[14]+[15]"
 "fr_b03i_h158","b03i","1580","","II. Lưu chuyển tiền từ hoạt động đầu tư","0","True",""
-"fr_b03i_21","b03i","1590","21","1. Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác","1","False","[b03d:21]"
+"fr_b03i_21","b03i","1590","21","1. Tiền chi để mua sắm, xây dựng TSCĐ và các tài sản dài hạn khác","1","False","NM(211,212,213,215,217,241)"
 "fr_b03i_22","b03i","1600","22","2. Tiền thu từ thanh lý, nhượng bán TSCĐ và các tài sản dài hạn khác","1","False","[b03d:22]"
 "fr_b03i_23","b03i","1610","23","3. Tiền chi cho vay, mua các công cụ nợ của đơn vị khác","1","False","[b03d:23]"
 "fr_b03i_24","b03i","1620","24","4. Tiền thu hồi cho vay, bán lại các công cụ nợ của đơn vị khác","1","False","[b03d:24]"
