@@ -1,0 +1,983 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* company_accounting_vn
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-14 14:52+0000\n"
+"PO-Revision-Date: 2026-11-14 14:52+0000\n"
+"Last-Translator: My Company\n"
+"Language-Team: Vietnamese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: company_accounting_vn
+#: model:ir.module.module,description:base.module_company_accounting_vn
+msgid ""
+"\n"
+"Vietnam Accounting (TT 99/2025/TT-BTC)\n"
+"======================================\n"
+"\n"
+"* Chart template ``vn_tt99`` (71 tài khoản cấp 1 theo Thông tư 99/2025/TT-BTC),\n"
+"  kế thừa dữ liệu thuế GTGT của ``l10n_vn``.\n"
+"* Tài khoản đối ứng (Nợ TK / Có TK) trên từng dòng bút toán khi ghi sổ.\n"
+"* Chặn ghi sổ khi TK 131/331/141 thiếu đối tượng (partner).\n"
+"* Trường hóa đơn điện tử theo NĐ 254/2026/NĐ-CP, nối chế độ chạy thử của company_einvoice.\n"
+"* Mẫu in Phiếu thu 01-TT, Phiếu chi 02-TT, Phiếu nhập 01-VT, Phiếu xuất 02-VT.\n"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.actions.report,print_report_name:company_accounting_vn.action_report_payment_voucher
+msgid "'Phieu_chi_%s' % (object.name or 'nhap')"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.actions.report,print_report_name:company_accounting_vn.action_report_stock_receipt
+msgid "'Phieu_nhap_kho_%s' % (object.name or 'nhap')"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.actions.report,print_report_name:company_accounting_vn.action_report_payment_receipt
+msgid "'Phieu_thu_%s' % (object.name or 'nhap')"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.actions.report,print_report_name:company_accounting_vn.action_report_stock_issue
+msgid "'Phieu_xuat_kho_%s' % (object.name or 'nhap')"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "(Viết bằng chữ):"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "<strong>Cộng</strong>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid ""
+"<strong>Giám đốc</strong><br/><i style=\"font-size:11px;\">(Ký, họ tên, đóng"
+" dấu)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid ""
+"<strong>Kế toán trưởng</strong><br/><i style=\"font-size:11px;\">(Ký, họ "
+"tên)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid ""
+"<strong>Người giao hàng</strong><br/><i style=\"font-size:11px;\">(Ký, họ "
+"tên)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid ""
+"<strong>Người lập phiếu</strong><br/><i style=\"font-size:11px;\">(Ký, họ "
+"tên)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid ""
+"<strong>Người nhận hàng</strong><br/><i style=\"font-size:11px;\">(Ký, họ "
+"tên)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid ""
+"<strong>Người nhận tiền</strong><br/><i style=\"font-size:11px;\">(Ký, họ "
+"tên)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid ""
+"<strong>Người nộp tiền</strong><br/><i style=\"font-size:11px;\">(Ký, họ "
+"tên)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "<strong>Thủ kho</strong><br/><i style=\"font-size:11px;\">(Ký, họ tên)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "<strong>Thủ quỹ</strong><br/><i style=\"font-size:11px;\">(Ký, họ tên)</i>"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_account_account
+msgid "Account"
+msgstr "Tài khoản"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_account_chart_template
+msgid "Account Chart Template"
+msgstr "Mẫu hệ thống tài khoản"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,help:company_accounting_vn.field_account_account__vn_display_code
+msgid ""
+"Account code without the zero padding added by the chart template (1110 -> "
+"111)."
+msgstr "Mã tài khoản không kèm các số 0 đệm do mẫu hệ thống tài khoản thêm vào (1110 -> 111)."
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_res_company__accounting_regime
+msgid "Accounting Regime"
+msgstr "Chế độ kế toán"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_payment__attached_documents
+msgid "Attached Original Documents"
+msgstr "Chứng từ gốc kèm theo"
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.view_account_payment_form_voucher_vn
+msgid "Cash Voucher"
+msgstr "Phiếu thu/chi"
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Chứng từ gốc."
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__res_company__accounting_regime__tt133
+msgid "Circular 133/2016/TT-BTC"
+msgstr "Thông tư 133/2016/TT-BTC"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__res_company__accounting_regime__tt99
+msgid "Circular 99/2025/TT-BTC"
+msgstr "Thông tư 99/2025/TT-BTC"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__1
+msgid "Class 1 - Short-term assets"
+msgstr "Loại 1 - Tài sản ngắn hạn"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__2
+msgid "Class 2 - Long-term assets"
+msgstr "Loại 2 - Tài sản dài hạn"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__3
+msgid "Class 3 - Liabilities"
+msgstr "Loại 3 - Nợ phải trả"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__4
+msgid "Class 4 - Equity"
+msgstr "Loại 4 - Vốn chủ sở hữu"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__5
+msgid "Class 5 - Revenue"
+msgstr "Loại 5 - Doanh thu"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__6
+msgid "Class 6 - Production and business costs"
+msgstr "Loại 6 - Chi phí sản xuất, kinh doanh"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__7
+msgid "Class 7 - Other income"
+msgstr "Loại 7 - Thu nhập khác"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__8
+msgid "Class 8 - Other expenses"
+msgstr "Loại 8 - Chi phí khác"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__account_account__vn_account_class__9
+msgid "Class 9 - Income summary"
+msgstr "Loại 9 - Xác định kết quả kinh doanh"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,help:company_accounting_vn.field_account_move_line__counterpart_name
+msgid ""
+"Comma-separated codes of every opposite-side account matched to this line."
+msgstr "Mã các tài khoản đối ứng được ghép với dòng này, cách nhau bằng dấu phẩy."
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_res_company
+msgid "Company"
+msgstr "Công ty"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move_line__counterpart_account_id
+msgid "Counterpart Account"
+msgstr "Tài khoản đối ứng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move_line__counterpart_name
+msgid "Counterpart Codes"
+msgstr "Mã tài khoản đối ứng"
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Có TK:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_account__display_name
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_chart_template__display_name
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move__display_name
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_payment__display_name
+#: model:ir.model.fields,field_description:company_accounting_vn.field_res_company__display_name
+#: model:ir.model.fields,field_description:company_accounting_vn.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_bank_statement_line__einvoice_date
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move__einvoice_date
+msgid "E-Invoice Date"
+msgstr "Ngày hóa đơn điện tử"
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.view_move_form_einvoice_decree_254
+msgid "E-Invoice Dry Run"
+msgstr "Chạy thử hóa đơn điện tử"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_bank_statement_line__einvoice_symbol
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move__einvoice_symbol
+msgid "E-Invoice Symbol (Decree 254)"
+msgstr "Ký hiệu hóa đơn điện tử (NĐ 254)"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,help:company_accounting_vn.field_account_payment__attached_documents
+msgid "For example: 03 invoices with delivery notes."
+msgstr "Ví dụ: 03 hóa đơn kèm phiếu giao hàng."
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Họ và tên người giao:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Họ và tên người nhận hàng:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Họ và tên người nhận tiền:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Họ và tên người nộp tiền:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_account__id
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_chart_template__id
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move__id
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move_line__id
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_payment__id
+#: model:ir.model.fields,field_description:company_accounting_vn.field_res_company__id
+#: model:ir.model.fields,field_description:company_accounting_vn.field_stock_picking__id
+msgid "ID"
+msgstr "ID"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_account_move
+msgid "Journal Entry"
+msgstr "Bút toán"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_account_move_line
+msgid "Journal Item"
+msgstr "Dòng bút toán"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/models/account_move.py:0
+msgid ""
+"Journal entry %(move)s: accounts %(accounts)s require a partner on every "
+"line."
+msgstr "Bút toán %(move)s: tài khoản %(accounts)s yêu cầu phải có đối tượng (partner) trên mọi dòng."
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,help:company_accounting_vn.field_account_account__vn_partner_required
+msgid ""
+"Journal items on this account must carry a partner (accounts 131, 331, 141)."
+msgstr "Các dòng bút toán trên tài khoản này phải có đối tượng (tài khoản 131, 331, 141)."
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Kèm theo:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.module.module,summary:base.module_company_accounting_vn
+msgid ""
+"Kế toán doanh nghiệp Việt Nam: TT 99/2025, tài khoản đối ứng, phiếu "
+"thu/chi/nhập/xuất"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Lý do chi:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Lý do nộp:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Mã số"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.voucher_header
+msgid "Mẫu số"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Nhập tại kho (ngăn lô):"
+msgstr ""
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/models/account_move_einvoice.py:0
+msgid "No e-invoice provider is configured."
+msgstr "Chưa cấu hình nhà cung cấp hóa đơn điện tử."
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Nợ TK:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,help:company_accounting_vn.field_account_move_line__counterpart_account_id
+msgid ""
+"Opposite-side account when it is unique (Nợ TK / Có TK). Empty when several "
+"accounts match."
+msgstr "Tài khoản đối ứng khi chỉ có một tài khoản duy nhất (Nợ TK / Có TK). Để trống khi có nhiều tài khoản."
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "PHIẾU CHI"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "PHIẾU NHẬP KHO"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "PHIẾU THU"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "PHIẾU XUẤT KHO"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_account__vn_partner_required
+msgid "Partner Required"
+msgstr "Bắt buộc có đối tượng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_payment__receiver_payer_address
+msgid "Payer / Receiver Address"
+msgstr "Địa chỉ người nộp/nhận tiền"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_payment__receiver_payer_name
+msgid "Payer / Receiver Name"
+msgstr "Họ tên người nộp/nhận tiền"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_account_payment
+msgid "Payment"
+msgstr "Thanh toán"
+
+#. module: company_accounting_vn
+#: model:ir.actions.report,name:company_accounting_vn.action_report_payment_voucher
+msgid "Phiếu chi (02-TT)"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.actions.report,name:company_accounting_vn.action_report_stock_receipt
+msgid "Phiếu nhập kho (01-VT)"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.actions.report,name:company_accounting_vn.action_report_payment_receipt
+msgid "Phiếu thu (01-TT)"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.actions.report,name:company_accounting_vn.action_report_stock_issue
+msgid "Phiếu xuất kho (02-VT)"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Quyển số: ..........."
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "STT"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Số chứng từ gốc kèm theo: .........."
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Số lượng"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Số tiền:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Số:"
+msgstr ""
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/models/template_vn_tt99.py:0
+msgid "TT 99/2025/TT-BTC"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_bank_statement_line__einvoice_tax_authority_code
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_move__einvoice_tax_authority_code
+msgid "Tax Authority Code"
+msgstr "Mã cơ quan thuế"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/models/account_move_einvoice.py:0
+msgid "The dry run only works with a provider in dry-run mode."
+msgstr "Chạy thử chỉ dùng được với nhà cung cấp đang ở chế độ chạy thử."
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Theo chứng từ"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Theo chứng từ số:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Thành tiền"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Thực nhập"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Thực xuất"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_stock_picking
+msgid "Transfer"
+msgstr "Chuyển tiền"
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid ""
+"Tên, nhãn hiệu, quy cách, phẩm chất vật tư, dụng cụ, sản phẩm, hàng hóa"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Tổng số tiền (viết bằng chữ):"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_account__vn_account_class
+msgid "VN Account Class"
+msgstr "Loại tài khoản (VN)"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_account_account__vn_display_code
+msgid "VN Display Code"
+msgstr "Mã tài khoản hiển thị (VN)"
+
+#. module: company_accounting_vn
+#: model:ir.module.module,shortdesc:base.module_company_accounting_vn
+msgid "Vietnam Accounting (TT 99/2025)"
+msgstr "Kế toán Việt Nam (TT 99/2025)"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,help:company_accounting_vn.field_res_company__accounting_regime
+msgid "Vietnamese accounting regime applied by this company."
+msgstr "Chế độ kế toán Việt Nam mà công ty áp dụng."
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Xuất tại kho (ngăn lô):"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+msgid "Đã nhận đủ số tiền (viết bằng chữ):"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Đơn giá"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.stock_voucher_document
+msgid "Đơn vị tính"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.voucher_header
+msgid "Đơn vị:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.payment_voucher_document
+#: model_terms:ir.ui.view,arch_db:company_accounting_vn.voucher_header
+msgid "Địa chỉ:"
+msgstr ""
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_accounting_report_wizard
+msgid "Vietnamese accounting books wizard"
+msgstr "Wizard sổ kế toán"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_accounting_report_line
+msgid "Accounting report result line"
+msgstr "Dòng kết quả sổ kế toán"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__report_type
+msgid "Report Type"
+msgstr "Loại sổ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__date_from
+msgid "Date From"
+msgstr "Từ ngày"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__date_to
+msgid "Date To"
+msgstr "Đến ngày"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__account_ids
+msgid "Accounts"
+msgstr "Tài khoản"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__partner_ids
+msgid "Partners"
+msgstr "Đối tượng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__journal_ids
+msgid "Journals"
+msgstr "Sổ nhật ký"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__label
+msgid "Description"
+msgstr "Diễn giải"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__counterpart
+msgid "Counterpart"
+msgstr "TK đối ứng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__bal_debit
+msgid "Balance Debit"
+msgstr "Dư Nợ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__bal_credit
+msgid "Balance Credit"
+msgstr "Dư Có"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__open_debit
+msgid "Opening Debit"
+msgstr "Dư Nợ đầu kỳ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__open_credit
+msgid "Opening Credit"
+msgstr "Dư Có đầu kỳ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__close_debit
+msgid "Closing Debit"
+msgstr "Dư Nợ cuối kỳ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__close_credit
+msgid "Closing Credit"
+msgstr "Dư Có cuối kỳ"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/reports/financial_reports.py:0
+msgid "At %s"
+msgstr "Tại ngày %s"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__report_type__b01
+msgid "B01-DN Statement of financial position"
+msgstr "B01-DN Báo cáo tình hình tài chính"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__report_type__b02
+msgid "B02-DN Income statement"
+msgstr "B02-DN Báo cáo kết quả hoạt động kinh doanh"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__report_type__b03
+msgid "B03-DN Cash flow statement"
+msgstr "B03-DN Báo cáo lưu chuyển tiền tệ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__bold
+msgid "Bold"
+msgstr "In đậm"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/wizards/financial_report_wizard.py:0
+msgid "Both dates are required and the start date must not be after the end date."
+msgstr "Phải nhập đủ hai ngày và ngày bắt đầu không được sau ngày kết thúc."
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__cash_flow_method
+msgid "Cash Flow Method"
+msgstr "Phương pháp lập báo cáo lưu chuyển tiền tệ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__accounting_report_line__kind__close
+msgid "Closing"
+msgstr "Cuối kỳ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__compare_previous
+msgid "Compare with previous period"
+msgstr "So sánh với kỳ trước"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__create_uid
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__create_uid
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__create_uid
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__create_uid
+msgid "Created by"
+msgstr "Người tạo"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__create_date
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__create_date
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__create_date
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__create_date
+msgid "Created on"
+msgstr "Ngày tạo"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__credit
+msgid "Credit"
+msgstr "Có"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__currency_id
+msgid "Currency"
+msgstr "Tiền tệ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__period_type__custom
+msgid "Custom dates"
+msgstr "Tùy chọn ngày"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__date
+msgid "Date"
+msgstr "Ngày"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__debit
+msgid "Debit"
+msgstr "Nợ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__cash_flow_method__direct
+msgid "Direct method"
+msgstr "Phương pháp trực tiếp"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/reports/financial_reports.py:0
+msgid "Financial report formula refers to an unknown or circular line: %s"
+msgstr "Công thức báo cáo tài chính tham chiếu đến chỉ tiêu không tồn tại hoặc vòng tròn: %s"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_vn_financial_report_line
+msgid "Financial statement line (TT 99 Appendix IV)"
+msgstr "Chỉ tiêu báo cáo tài chính (Phụ lục IV TT 99)"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_vn_financial_report_wizard
+msgid "Financial statements wizard"
+msgstr "Trình hướng dẫn báo cáo tài chính"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__formula
+msgid "Formula"
+msgstr "Công thức"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/reports/financial_reports.py:0
+msgid "From %(start)s to %(end)s"
+msgstr "Từ %(start)s đến %(end)s"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__report_type__all
+msgid "Full set (B01, B02, B03)"
+msgstr "Bộ đầy đủ (B01, B02, B03)"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__accounting_report_line__kind__grand
+msgid "Grand total"
+msgstr "Tổng cộng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__accounting_report_line__kind__group
+msgid "Group"
+msgstr "Nhóm"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__cash_flow_method__indirect
+msgid "Indirect method"
+msgstr "Phương pháp gián tiếp"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/reports/financial_report_line.py:0
+msgid "Invalid formula on line %(code)s near \"%(rest)s\"."
+msgstr "Công thức sai ở chỉ tiêu %(code)s gần \"%(rest)s\"."
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__journal
+msgid "Journal"
+msgstr "Sổ nhật ký"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,help:company_accounting_vn.field_accounting_report_wizard__account_ids
+msgid "Journal, ledger and trial balance only. A parent account also selects its sub-accounts."
+msgstr "Chỉ áp dụng cho sổ nhật ký, sổ cái và bảng cân đối số phát sinh. Chọn tài khoản cha sẽ lấy cả các tài khoản con."
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__kind
+msgid "Kind"
+msgstr "Loại dòng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__write_uid
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__write_uid
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__write_uid
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Người cập nhật cuối"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__write_date
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__write_date
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__write_date
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__write_date
+msgid "Last Updated on"
+msgstr "Ngày cập nhật cuối"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__level
+msgid "Level"
+msgstr "Mức"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__line_ids
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__accounting_report_line__kind__line
+msgid "Line"
+msgstr "Dòng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__code
+msgid "Line Code"
+msgstr "Mã số chỉ tiêu"
+
+#. module: company_accounting_vn
+#: model:ir.model.constraint,message:company_accounting_vn.constraint_vn_financial_report_line_code_uniq
+msgid "Line code must be unique per report."
+msgstr "Mã số chỉ tiêu phải duy nhất trong mỗi báo cáo."
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__month
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__period_type__month
+msgid "Month"
+msgstr "Tháng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/wizards/accounting_report_wizard.py:0
+msgid "Only accountants can print accounting books."
+msgstr "Chỉ kế toán mới được in sổ kế toán."
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/reports/financial_reports.py:0
+msgid "Only accounting managers can open the financial statements."
+msgstr "Chỉ kế toán trưởng mới được mở báo cáo tài chính."
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__accounting_report_line__kind__open
+msgid "Opening"
+msgstr "Đầu kỳ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__partner
+msgid "Partner"
+msgstr "Đối tượng"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__period_type
+msgid "Period Type"
+msgstr "Loại kỳ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__quarter
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__period_type__quarter
+msgid "Quarter"
+msgstr "Quý"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__sequence
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_line__sequence
+msgid "Sequence"
+msgstr "Thứ tự"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/wizards/accounting_report_wizard.py:0
+msgid "Showing only the first %(shown)s of %(total)s lines. Narrow the filters, or print the PDF / export Excel to see everything."
+msgstr "Chỉ hiển thị %(shown)s dòng đầu trong tổng số %(total)s dòng. Hãy thu hẹp bộ lọc, hoặc in PDF / xuất Excel để xem đầy đủ."
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/wizards/accounting_report_wizard.py:0
+msgid "The start date must not be after the end date."
+msgstr "Ngày bắt đầu không được sau ngày kết thúc."
+
+#. module: company_accounting_vn
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__accounting_report_line__kind__total
+msgid "Total"
+msgstr "Cộng"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/reports/ledger_engine.py:0
+msgid "Unknown report type %s"
+msgstr "Loại sổ không xác định: %s"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_vn_financial_report
+msgid "Vietnam financial statements engine"
+msgstr "Bộ máy báo cáo tài chính Việt Nam"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_report_company_accounting_vn_report_vn_ledger
+msgid "Vietnamese ledger QWeb report"
+msgstr "Mẫu in QWeb sổ kế toán Việt Nam"
+
+#. module: company_accounting_vn
+#: model:ir.model,name:company_accounting_vn.model_vn_ledger_engine
+msgid "Vietnamese ledger computation engine"
+msgstr "Bộ máy tính sổ kế toán Việt Nam"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__voucher
+msgid "Voucher"
+msgstr "Chứng từ"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_line__wizard_id
+msgid "Wizard"
+msgstr "Trình hướng dẫn"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__xlsx_file
+msgid "Xlsx File"
+msgstr "Tệp Excel"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_accounting_report_wizard__xlsx_filename
+msgid "Xlsx Filename"
+msgstr "Tên tệp Excel"
+
+#. module: company_accounting_vn
+#: model:ir.model.fields,field_description:company_accounting_vn.field_vn_financial_report_wizard__year
+#: model:ir.model.fields.selection,name:company_accounting_vn.selection__vn_financial_report_wizard__period_type__year
+msgid "Year"
+msgstr "Năm"
+
+#. module: company_accounting_vn
+#. odoo-python
+#: code:addons/company_accounting_vn/reports/financial_reports.py:0
+#: code:addons/company_accounting_vn/wizards/accounting_report_wizard.py:0
+msgid "You are not allowed to access this company."
+msgstr "Bạn không được phép truy cập công ty này."

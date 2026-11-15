@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- In sổ kế toán (khổ A4 ngang). Dữ liệu lấy từ accounting.report.wizard. -->
+    <record id="action_report_vn_ledger" model="ir.actions.report">
+        <field name="name">Sổ kế toán</field>
+        <field name="model">accounting.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_accounting_vn.report_vn_ledger</field>
+        <field name="print_report_name">'So_ke_toan'</field>
+        <field name="paperformat_id" ref="company_accounting_vn.paperformat_vn_ledger_a4_landscape"/>
+        <field name="group_ids" eval="[(4, ref('account.group_account_user'))]"/>
+    </record>
+
+    <template id="report_vn_ledger">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="report" t-value="reports[o.id]"/>
+                <t t-set="company" t-value="o.company_id"/>
+                <t t-set="company_address" t-value="', '.join(filter(None, [company.street, company.street2, company.city, company.state_id.name]))"/>
+                <t t-set="form_code" t-value="report['form_code']"/>
+                <t t-set="form_note" t-value="'(Ban hành theo Thông tư số 99/2025/TT-BTC)' if report['form_code'] else ''"/>
+                <div class="article" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id">
+                <div class="page" style="font-size:11px;">
+                    <t t-call="company_accounting_vn.voucher_header"/>
+                    <h3 style="text-align:center; margin:4px 0;"><strong t-out="report['title'].upper()"/></h3>
+                    <div style="text-align:center; margin-bottom:8px;"><i t-out="report['period']"/></div>
+                    <table class="table table-sm" style="width:100%; border-collapse:collapse;">
+                        <thead>
+                            <tr>
+                                <th t-foreach="report['columns']" t-as="col"
+                                    style="border:1px solid #000; text-align:center; background:#eee;">
+                                    <t t-out="col[1]"/>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="report['rows']" t-as="row"
+                                t-att-style="'font-weight:bold;' if row['kind'] != 'line' else ''">
+                                <td t-foreach="report['columns']" t-as="col"
+                                    t-att-style="'border:1px solid #999;' + ('text-align:right;' if col[2] else '')">
+                                    <t t-if="col[2]">
+                                        <span t-if="row.get(col[0])" t-out="row[col[0]]"
+                                              t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"/>
+                                    </t>
+                                    <t t-else="" t-out="row.get(col[0]) or ''"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="width:100%; margin-top:20px; text-align:center; table-layout:fixed;">
+                        <tr>
+                            <td><strong>Người lập biểu</strong><br/><i>(Ký, họ tên)</i></td>
+                            <td><strong>Kế toán trưởng</strong><br/><i>(Ký, họ tên)</i></td>
+                            <td><strong>Giám đốc</strong><br/><i>(Ký, họ tên, đóng dấu)</i></td>
+                        </tr>
+                    </table>
+                </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

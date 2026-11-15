@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Phiếu thu (Mẫu số 01 - TT) -->
+    <record id="action_report_payment_receipt" model="ir.actions.report">
+        <field name="name">Phiếu thu (01-TT)</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">company_accounting_vn.report_payment_receipt</field>
+        <field name="print_report_name">'Phieu_thu_%s' % (object.name or 'nhap')</field>
+        <field name="paperformat_id" ref="company_accounting_vn.paperformat_vn_voucher_a4"/>
+        <field name="binding_model_id" ref="account.model_account_payment"/>
+        <field name="binding_type">report</field>
+        <field name="group_ids" eval="[(4, ref('account.group_account_user'))]"/>
+    </record>
+
+    <template id="report_payment_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="is_receipt" t-value="True"/>
+                <div class="article" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id">
+                    <t t-call="company_accounting_vn.payment_voucher_document"/>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
