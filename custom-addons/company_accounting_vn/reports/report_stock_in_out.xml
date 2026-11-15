@@ -30,7 +30,9 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="is_receipt" t-value="True"/>
-                <t t-call="company_accounting_vn.stock_voucher_document"/>
+                <div class="article" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id">
+                    <t t-call="company_accounting_vn.stock_voucher_document"/>
+                </div>
             </t>
         </t>
     </template>
@@ -39,7 +41,9 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-set="is_receipt" t-value="False"/>
-                <t t-call="company_accounting_vn.stock_voucher_document"/>
+                <div class="article" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id">
+                    <t t-call="company_accounting_vn.stock_voucher_document"/>
+                </div>
             </t>
         </t>
     </template>

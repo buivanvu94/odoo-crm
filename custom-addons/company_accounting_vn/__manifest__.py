@@ -26,6 +26,7 @@ Vietnam Accounting (TT 99/2025/TT-BTC)
         'company_payment_approval',
     ],
     'data': [
+        'security/security_groups.xml',
         'security/ir.access.csv',
         'data/report_paperformat.xml',
         'views/res_company_views.xml',

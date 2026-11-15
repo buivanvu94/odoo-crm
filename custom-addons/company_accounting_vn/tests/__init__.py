@@ -12,3 +12,4 @@ from . import test_financial_review_fixes
 from . import test_review_fixes_misc
 from . import test_voucher_review_fixes
 from . import test_bank_book_reconciliation
+from . import test_manager_group_implies_user

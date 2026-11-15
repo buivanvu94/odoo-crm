@@ -19,6 +19,7 @@
                 <t t-set="company_address" t-value="', '.join(filter(None, [company.street, company.street2, company.city, company.state_id.name]))"/>
                 <t t-set="form_code" t-value="report['form_code']"/>
                 <t t-set="form_note" t-value="'(Ban hành theo Thông tư số 99/2025/TT-BTC)' if report['form_code'] else ''"/>
+                <div class="article" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id">
                 <div class="page" style="font-size:11px;">
                     <t t-call="company_accounting_vn.voucher_header"/>
                     <h3 style="text-align:center; margin:4px 0;"><strong t-out="report['title'].upper()"/></h3>
@@ -53,6 +54,7 @@
                             <td><strong>Giám đốc</strong><br/><i>(Ký, họ tên, đóng dấu)</i></td>
                         </tr>
                     </table>
+                </div>
                 </div>
             </t>
         </t>
