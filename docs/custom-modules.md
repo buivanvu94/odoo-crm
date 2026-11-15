@@ -14,9 +14,9 @@ những phần **cần tài khoản/API thật** mới chạy được.
 | `company_einvoice` | `account` | Đã cài | 2 |
 | `company_omnichannel` | `crm` | Đã cài | 3 |
 | `company_payment_approval` | `account` | Đã cài | 5 |
-| `company_accounting_vn` | `l10n_vn`, `stock`, `company_einvoice`, `company_payment_approval` | Chưa cài trên `odoo-crm` (cài mới trên DB trắng đạt) | 54 |
+| `company_accounting_vn` | `l10n_vn`, `stock`, `company_einvoice`, `company_payment_approval` | Đã cài, công ty dùng chart `vn_tt99` | 88 |
 
-- Tổng: **81 test, 0 failed, 0 error** (27 test module cũ + 54 test `company_accounting_vn`).
+- Tổng: **115 test, 0 failed, 0 error** (27 test module cũ + 88 test `company_accounting_vn`).
 - Server dev: <http://localhost:8069>, DB `odoo-crm`.
 - Log cài đặt: `custom-install.log`.
 
@@ -226,7 +226,9 @@ muốn duyệt cả hóa đơn nhà cung cấp trước khi ghi sổ, cần mở
 ## 8. `company_accounting_vn` - Kế toán doanh nghiệp Việt Nam (TT 99/2025)
 
 Đặc tả và lộ trình: [ketoan.md](ketoan.md). Cài: `-i company_accounting_vn`,
-rồi chọn chart template **`vn_tt99`** cho công ty.
+rồi chọn chart template **`vn_tt99`** cho công ty. In PDF cần `wkhtmltopdf` trên máy.
+Dữ liệu thử Q4/2026: [`scripts/seed-accounting-vn-demo.py`](../scripts/seed-accounting-vn-demo.py)
+(chỉ chạy trên DB thử, backup trước).
 
 - **Chart TT 99:** kế thừa `l10n_vn` (71 TK cấp 1, thuế GTGT 0/5/8/10/KCT).
   Template đệm số 0 vào mã TK (111 thành `1110`); dùng `vn_display_code` khi in.
@@ -244,9 +246,10 @@ rồi chọn chart template **`vn_tt99`** cho công ty.
   `company_einvoice`, có nút chạy thử (dry-run).
 
 **Phân quyền:** sổ sách cho `account.group_account_user`; BCTC chỉ
-`account.group_account_manager`.
+`account.group_account_manager`. Module cho nhóm manager kéo theo nhóm user
+(Odoo 20 không tự kéo), nên kế toán trưởng dùng được cả sổ sách.
 
-**Còn lại cần làm:** cài `wkhtmltopdf` rồi kiểm PDF A4 thực tế; đối chiếu mã
+**Còn lại cần làm:** đối chiếu mã
 chỉ tiêu BCTC và cột sổ với nguyên văn Phụ lục I/III/IV TT 99 (hiện bám mẫu
 TT 200); số dư đầu kỳ chưa xử lý kết chuyển cuối năm; TT 133 mới có cờ
 `accounting_regime`.

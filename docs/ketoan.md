@@ -85,6 +85,9 @@ Mục tiêu là xây dựng một module chuẩn hóa, bền vững, **tuyệt �
 
 ## 4. Kiến trúc kỹ thuật Module `company_accounting_vn`
 
+> Cây dưới đây là thiết kế ban đầu; cấu trúc thực tế nằm ở thư mục
+> [`custom-addons/company_accounting_vn`](../custom-addons/company_accounting_vn) (đã thêm các engine sổ/BCTC, `hooks.py`, `migrations/`).
+
 Tuân thủ **Thang can thiệp 6 tầng** tại §2 của [odoo-module-playbook.md](odoo-module-playbook.md).
 
 ```
@@ -134,8 +137,8 @@ custom-addons/company_accounting_vn/
   * `counterpart_account_id` (`Many2one('account.account')`): Tài khoản đối ứng.
   * `counterpart_name` (`Char`): Chuỗi tóm tắt đối ứng (ví dụ: "1111", "3311").
 * **Trường bổ sung trên `account.move`:**
-  * `einvoice_symbol` (Ký hiệu hóa đơn - ví dụ: `1C26TBB`).
-  * `einvoice_number` (Số hóa đơn điện tử).
+  * `einvoice_symbol` (Ký hiệu hóa đơn - ví dụ: `1C26TBB`; thực tế là bí danh của `einvoice_serial` trong `company_einvoice`).
+  * `einvoice_number` (Số hóa đơn điện tử; dùng lại field của `company_einvoice`).
   * `einvoice_date` (Ngày lập/ký số hóa đơn).
   * `einvoice_tax_authority_code` (Mã cơ quan thuế cấp nếu có mã).
 * **Trường bổ sung trên `account.payment`:**
@@ -261,4 +264,4 @@ Trước khi bàn giao module vào production, module phải vượt qua checkli
 - [x] Nâng cấp trên database đã có dữ liệu không gây mất hoặc sai lệch số dư (`-u company_accounting_vn`).
 - [ ] 100% các file Python tuân thủ PEP8, có `test_*.py` với kết quả passed toàn bộ.
 - [x] File dịch `i18n/vi.po` đầy đủ các thuật ngữ kế toán chuyên ngành.
-- [ ] Mẫu in PDF căn lề chuẩn trang A4, không bị tràn dòng hoặc vỡ trang.
+- [x] Mẫu in PDF căn lề chuẩn trang A4, không bị tràn dòng hoặc vỡ trang.
